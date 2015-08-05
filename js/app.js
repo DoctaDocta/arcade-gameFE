@@ -6,6 +6,11 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    //Setting the Enemy initial location (you need to implement)
+    this.x = canvas.width * 0.2;
+    this.y = canvas.height * 0.6;
+    // the Enemy speed (you need to implement)
+    this.speed = 5;
 }
 
 // Update the enemy's position, required method for game
@@ -14,6 +19,11 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.speed = 5 * dt;
+    //handle collision w player
+    if (this.x = player.x && this.y = player.y) {
+        //restart game? or end game?
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -25,11 +35,37 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+var Player = function() {
+    this.sprite = "images/char-cat-girl.png";
+    this.x = canvas.width * .5;
+    this.y = canvas.height * .2;
+}
 
+Player.prototype.update = function(dt) {
+    // You should multiply any movement by the dt parameter
+    // which will ensure the game runs at the same speed for
+    // all computers.
+    this.speed = 5 * dt;
+}
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Player.prototype.reset = function() {
+    this.x = canvas.width * .5;
+    this.y = canvas.height * .2;
+    }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+enemy1 = Object.create(Enemy);
+enemy2 = Object.create(Enemy);
+
+allEnemies = [enemy1, enemy2];
+
+player = Object.create(Player);
 
 
 // This listens for key presses and sends the keys to your
@@ -41,6 +77,18 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
+    //Recall that the player cannot move off screen 
+    //(so you will need to check for that)
+    if (player.x > canvas.width || player.x < canvas.width 
+        || player.y > canvas.height || player.y < canvas.height) {
+        //reset the game
+    }
+
+    if (player.x)
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+    //If the player reaches the water the game should be reset 
+    // by moving the player back to the initial location (you can write a separate reset Player method to handle that).
