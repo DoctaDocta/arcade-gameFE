@@ -7,11 +7,11 @@ var Enemy = function() {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     //Setting the Enemy initial location (you need to implement)
-    this.x = canvas.width * 0.2;
-    this.y = canvas.height * 0.6;
+    this.x = -20;
+    this.y = 63; //or 146, 229
     // the Enemy speed (you need to implement)
     this.speed = 5;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -21,15 +21,15 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.speed = 5 * dt;
     //handle collision w player
-    if (this.x = player.x && this.y = player.y) {
+    //if (this.x === player.x && this.y = player.y) {
         //restart game? or end game?
-    }
-}
+    //}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -37,35 +37,34 @@ Enemy.prototype.render = function() {
 
 var Player = function() {
     this.sprite = "images/char-cat-girl.png";
-    this.x = canvas.width * .5;
-    this.y = canvas.height * .2;
-}
+    this.x = 202;
+    this.y = 385;
+};
 
 Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
     this.speed = 5 * dt;
-}
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.reset = function() {
-    this.x = canvas.width * .5;
-    this.y = canvas.height * .2;
-    }
+    this.x = 50;
+    this.y = 400;
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-enemy1 = Object.create(Enemy);
-enemy2 = Object.create(Enemy);
+var enemy1 = new Enemy();
+var enemy2 = new Enemy();
+var allEnemies = [enemy1, enemy2];
 
-allEnemies = [enemy1, enemy2];
-
-player = Object.create(Player);
+var player = new Player();
 
 
 // This listens for key presses and sends the keys to your
@@ -79,12 +78,11 @@ document.addEventListener('keyup', function(e) {
     };
     //Recall that the player cannot move off screen 
     //(so you will need to check for that)
-    if (player.x > canvas.width || player.x < canvas.width 
-        || player.y > canvas.height || player.y < canvas.height) {
+    //if (player.x > canvas.width || player.x < canvas.width || player.y > canvas.height || player.y < canvas.height) {
         //reset the game
-    }
+    //};
 
-    if (player.x)
+    ///if (player reachers water the game) {relevant code doing good stuff}
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
