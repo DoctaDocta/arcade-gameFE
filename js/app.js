@@ -88,6 +88,7 @@ Player.prototype.handleInput= function(key) {
 var allEnemies = [];
 allEnemies[0] = new Enemy(-20,63);
 allEnemies[1] = new Enemy(-20, 229);
+allEnemies[2] = new Enemy(-20, 138);
 var player = new Player(202, 385);
 
 
@@ -100,17 +101,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-    //Recall that the player cannot move off screen 
-    //(so you will need to check for that)
-    //if (player.x > canvas.width || player.x < canvas.width || player.y > canvas.height || player.y < canvas.height) {
-        //reset the game
-    //};
-
-    ///if (player reachers water the game) {relevant code doing good stuff}
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-
-    //If the player reaches the water the game should be reset 
-    // by moving the player back to the initial location (you can write a separate reset Player method to handle that).
