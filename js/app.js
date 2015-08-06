@@ -56,6 +56,25 @@ Player.prototype.reset = function() {
     this.x = 50;
     this.y = 400;
 };
+
+Player.prototype.handleInput = function(e) {
+    if (e === 37){
+        //move player left
+        this.x -= 5;
+    };
+    if (e === 38){
+        //move player left
+        this.y += 5;
+    };
+    if (e === 39){
+        //move player left
+        this.x += 5;
+    };
+    if (e === 40){
+        //move player left
+        this.y -= 5;
+    };
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
