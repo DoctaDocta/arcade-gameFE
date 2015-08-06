@@ -64,26 +64,30 @@ Player.prototype.reset = function() {
 Player.prototype.handleInput= function(key) {
     switch (key){
         case 'left':
-            this.x = this.x - 40;
+            if (this.x > 0){
+                this.x = this.x - 40;};
             break;
         case 'right':
-            this.x = this.x + 40;
+            if (this.x < 410){
+                this.x = this.x + 40;};
             break;
         case 'up':
-            this.y = this.y - 40;
+            if (this.y >= 70){
+                this.y = this.y - 40;};
             break;
         case 'down':
-            this.y = this.y + 40;
+            if (this.y < 390){
+                this.y = this.y + 40;};
             break;
     };
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var enemy1 = new Enemy(-20,63);
-var enemy2 = new Enemy(-20, 229);
 var allEnemies = [];
-var allEnemies = [enemy1, enemy2];
+allEnemies[0] = new Enemy(-20,63);
+allEnemies[1] = new Enemy(-20, 229);
 var player = new Player(202, 385);
 
 
