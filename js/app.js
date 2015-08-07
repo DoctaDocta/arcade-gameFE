@@ -4,7 +4,8 @@ function rangeCheck(p1,p2){
     if(p2>p1-30.5 && p2<p1+30.5){   // rangecheck for collisions
         return true;
     }
-};
+}; // modified the code from another user's project which can be found here: 
+//https://github.com/adityagorti/arcade-game/blob/master/js/app.js
 
 // the next two functions allocate locatinos for the enemies to spawn 
 // once they cross the screen towards the right.
