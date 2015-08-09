@@ -1,20 +1,20 @@
 
 //**** Helper functions *****//
 function rangeCheck(p1,p2){
-	if(p2>p1-30.5 && p2<p1+30.5){   // rangecheck for collisions
+	if(p2>p1-30.5 && p2<p1+30.5){// rangecheck for collisions
 		return true;
 	}
 }
 
-// modified the code from another user's project which can be found here: 
+// modified the code from another user's project which can be found here:
 //https://github.com/adityagorti/arcade-game/blob/master/js/app.js
 
-// the next two functions allocate locations for the enemies to spawn 
+// the next two functions allocate locations for the enemies to spawn
 // once they cross the screen towards the right.
 function randomYPos(){
 	var yPositions = [60,149,226,60];
 	var randomY = yPositions[Math.floor(Math.random()*yPositions.length)];
-    return randomY;  //generate random Y positioning
+	return randomY;//generate random Y positioning
 }
 
 function randomXPos(){
@@ -33,25 +33,24 @@ var collisionState = false;
 
 // Enemy class, and update and render methods.
 var Enemy = function(x,y) {
-    this.sprite = 'images/enemy-bug.png'; //add multiple image functionality
-    this.x = x;
-    this.y = y; 
-    // the Enemy speed, x, and y are  implemented in enemy.update below...
-
-}
+	this.sprite = 'images/enemy-bug.png';//add multiple image functionality
+	this.x = x;
+	this.y = y;
+	// the Enemy speed, x, and y are  implemented in enemy.update below...
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    while(collisionState){    //handle collision w player
+// You should multiply any movement by the dt parameter
+// which will ensure the game runs at the same speed for
+// all computers.
+	while(collisionState){//handle collision w player
 		player.reset();
 		successCount--;
 		if (collisionCount === 1){
 			alert("You have been eaten for the " + collisionCount + "st time!\nScore: " + successCount);
-		} 
+		}
 		else if (collisionCount === 2){
 			alert("You have been eaten for the " + collisionCount + "nd time!\nScore: " + successCount);
 		}
@@ -63,34 +62,34 @@ Enemy.prototype.update = function(dt) {
 		}
 		collisionState = false;
 	};
-    
 	this.speed = this.x + (Math.random() * 300 * dt);
 	this.x = this.speed; // this deals with the speed
-                        // do it in update so it acts as a function of dt
+						// do it in update so it acts as a function of dt
 
 	if (this.x > 505){ //reset enemy to left of screen @ 'random' position
 		this.x = randomXPos();
 		this.y = randomYPos();
 	}
 
-if (rangeCheck(player.y, this.y) && rangeCheck(player.x, this.x)){
-	collisionCount++;
-	collisionState = true; 
-};
-return collisionCount;
+	if (rangeCheck(player.y, this.y) && rangeCheck(player.x, this.x)){
+		collisionCount++;
+		collisionState = true;
+	};
+
+	return collisionCount;
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 
 var Player = function(x,y) {
 	this.sprite = "images/char-cat-girl.png";
 	this.x = x;
 	this.y = y;
-}
+};
 
 Player.prototype.update = function(dt) {
 // You should multiply any movement by the dt parameter
@@ -105,16 +104,16 @@ Player.prototype.update = function(dt) {
 		player.reset();
 	}
 	return successCount;
-}
+};
 
 Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.reset = function() {
 	this.x = 202;
 	this.y = 375;
-}
+};
 
 // the handleinput function moves the player based on rows and columns
 // defined in the enginer.js file.
@@ -133,12 +132,12 @@ Player.prototype.handleInput= function(key) {
 			this.y = this.y - 83;
 			break;
 		case 'down':
-			if (this.y < 375){    
+			if (this.y < 375){
 				this.y = this.y + 83;};
 			break;
 		};
 
-	}
+};
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
@@ -151,7 +150,7 @@ document.addEventListener('keyup', function(e) {
 	player.handleInput(allowedKeys[e.keyCode]);
 })
 
-        //***** Game State *****//
+		//***** Game State *****//
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
@@ -162,5 +161,5 @@ allEnemies[3] = new Enemy(-300, 143);
 allEnemies[4] = new Enemy(-30, 226);
 allEnemies[5] = new Enemy(-180, 60);
 var player = new Player(202, 375);
-        //*******************//
+		//*******************//
 
